@@ -750,7 +750,29 @@ var returnAdminRouter = function(io) {
                 res.end(settings.system_illegal_param);
             }
         }else{
-            User.findOne({}).populate('group').exec(function(err,user){
+            var jsondata = {
+                "_id" : "cygssss",
+                "name" : "hello",
+                "group" : "1",
+                "logo" : "/upload/images/defaultlogo.png",
+                "date" :"2016-01-23T14:36:30.384Z",
+                "comments" : "测试下...",
+                "__v" : 0
+            };
+
+            var instance = new User(jsondata);
+            /*instance.name = 'hello';
+            instance.cyg = 'test';*/
+            instance.save(function (err,data) {
+                if(err){
+                    res.end(err);
+                }else{
+                    console.log2(data)
+                    return res.json(data);
+                }
+            });
+
+           /* User.findOne({}).populate('group').exec(function(err,user){
                 if(err){
                     res.end(err);
                 }
@@ -758,7 +780,7 @@ var returnAdminRouter = function(io) {
                     console.log2(user)
                     return res.json(user);
                 }
-            })
+            })*/
         }
     });
 
