@@ -34,6 +34,16 @@ var partials = require('express-partials');
 /*实例化express对象*/
 var app = express();
 
+var json = require('json');
+
+var dataFile = './data.log';
+console.log2 = function(msg) {
+    console.log(msg);
+    //process.stdout.write('[###]' + msg + '[###]\n');
+    msg = JSON.stringify(msg);
+    fs.appendFile(dataFile,'\n\n######################\n'+msg+'\n',{encoding:'utf8'});
+};
+
 //ueditor注册
 var ueditor = require('ueditor-nodejs');
 app.use('/ueditor/ue', ueditor({//这里的/ueditor/ue是因为文件件重命名为了ueditor,如果没改名，那么应该是/ueditor版本号/ue

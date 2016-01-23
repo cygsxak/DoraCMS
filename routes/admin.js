@@ -136,15 +136,20 @@ var returnAdminRouter = function(io) {
 
 //对象列表查询
     router.get('/manage/getDocumentList/:defaultUrl',function(req,res,next){
-
+        //http://127.0.0.1:81/admin/manage/getDocumentList/userManage_user?limit=20&currentPage=1&searchKey=&area=
         var currentPage = req.params.defaultUrl;
         if(adminFunc.checkAdminPower(req,currentPage + '_view')){
 
             var targetObj = adminFunc.getTargetObj(currentPage);
+
             var params = url.parse(req.url,true);
+
             var keywords = params.query.searchKey;
             var area = params.query.area;
             var keyPr = [];
+
+            console.log2("searchKey:"+keywords);
+            console.log2(params);
 
             if(keywords){
                 var reKey = new RegExp(keywords, 'i');
@@ -165,7 +170,11 @@ var returnAdminRouter = function(io) {
                 }
             }
 
+            console.log2(keyPr);
+
             keyPr = adminFunc.setQueryByArea(req,keyPr,targetObj,area);
+
+            console.log2(keyPr);
 
             DbOpt.pagination(targetObj,req, res,keyPr);
 

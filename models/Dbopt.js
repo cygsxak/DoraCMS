@@ -102,6 +102,8 @@ var DbOpt = {
 
     pagination : function(obj,req,res,conditions){
 
+        console.log2(obj);
+
         var params = url.parse(req.url,true);
         var startNum = (params.query.currentPage - 1)*params.query.limit + 1;
         var currentPage = Number(params.query.currentPage);

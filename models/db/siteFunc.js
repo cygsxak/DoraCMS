@@ -467,6 +467,7 @@ var siteFunc = {
                     res.render(targetPath, siteFunc.setDataForUser(req, res, params , temp.alias, defaultTempPath));
                 }else if(type == 'userNotice'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
+
                     res.render(targetPath, siteFunc.setDataForUserNotice(req, res, params, temp.alias, defaultTempPath));
                 }else if(type == 'userInfo'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;

@@ -126,7 +126,8 @@ var returnUsersRouter = function(io) {
                     res.end(errors);
                 }else{
                     system.sendEmail(settings.email_notice_user_reg,regMsg,function(err){
-                        if(err && err == 'notCurrentEmail'){
+                        //if(err && err == 'notCurrentEmail'){
+                        if(0){
                             res.end('乱写邮箱被我发现了吧！');
                         }else{
                             var newPsd = DbOpt.encrypt(password,settings.encrypt_key);
