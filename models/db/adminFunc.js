@@ -229,7 +229,9 @@ var adminFunc = {
     renderToManagePage : function(req,res,url,pageKey){
 
         if(this.checkAdminPower(req,pageKey[0] + '_view')){
+
             res.render(url, this.setPageInfo(req,res,pageKey,'/admin/'+url));
+
         }else{
             res.render("manage/public/notice", this.setDataForInfo('danger','对不起，您无权操作 <strong>'+pageKey[1]+'</strong> 模块！'));
         }

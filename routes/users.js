@@ -125,8 +125,15 @@ var returnUsersRouter = function(io) {
                     errors = "邮箱或用户名已存在！";
                     res.end(errors);
                 }else{
+                    /*system.test('cyg',email,function(err){
+                        if(err){
+                            res.end(err);
+                        }
+                    });
+                    res.end('测试结果');*/
                     system.sendEmail(settings.email_notice_user_reg,regMsg,function(err){
-                        if(err && err == 'notCurrentEmail'){
+                        if(0){
+                        //if(err && err == 'notCurrentEmail'){
                             res.end('乱写邮箱被我发现了吧！');
                         }else{
                             var newPsd = DbOpt.encrypt(password,settings.encrypt_key);

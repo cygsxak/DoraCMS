@@ -24,7 +24,42 @@ var archiver = require('archiver');
 var formidable = require('formidable')
 var mime = require('../util/mime').types;
 var iconv = require('iconv-lite');
+var send_sms_uri = '/v1/sms/send.json';
+
 var system = {
+
+    test: function(name,mail,callback){
+
+        //send_sms.geturl(send_sms_uri,'ec0dc0d3e2b7ad2b373fa6cb9797cbf0','18621298236','hello');
+        send_sms.geturl('xxx','ec0dc0d3e2b7ad2b373fa6cb9797cbf0');
+
+        /*var nodemailer = require('nodemailer');
+
+        var transporter = nodemailer.createTransport({
+            service: 'QQ',
+            auth: {
+                user: 'cygsxak@qq.com',
+                pass: 'cyg@admin999'
+            }
+        });
+
+        var mailOptions = {
+            from: 'cygsxak@qq.com', // sender address
+            to: mail, // list of receivers
+            subject: 'Hello ✔', // Subject line
+            text: 'Hello world ✔', // plaintext body
+            html: '<b>Hello world ✔</b>' // html body
+        };
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                console.log(error);
+            }else{
+                console.log('Message sent: ' + info.response);
+            }
+            callback();
+        });*/
+    },
 
     sendEmail : function(key,obj,callBack){
 

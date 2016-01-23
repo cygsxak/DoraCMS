@@ -165,8 +165,9 @@ var returnAdminRouter = function(io) {
                 }
             }
 
+            //console.log2(targetObj);
             keyPr = adminFunc.setQueryByArea(req,keyPr,targetObj,area);
-
+            //console.log2(keyPr);
             DbOpt.pagination(targetObj,req, res,keyPr);
 
         }else{
@@ -277,9 +278,13 @@ var returnAdminRouter = function(io) {
 
     });
 
-//获取单个对象数据
+
+    //获取单个对象数据
     router.get('/manage/:defaultUrl/item',function(req,res,next){
         var currentPage = req.params.defaultUrl;
+
+        console.log2(currentPage);
+
         var targetObj = adminFunc.getTargetObj(currentPage);
         if(adminFunc.checkAdminPower(req,currentPage + '_view')){
             if(targetObj == AdminUser){
@@ -299,6 +304,7 @@ var returnAdminRouter = function(io) {
                 }
 
             }else{
+
                 DbOpt.findOne(targetObj,req, res,"find one obj success");
             }
 
@@ -310,11 +316,14 @@ var returnAdminRouter = function(io) {
 
 
 
-//更新单条记录(执行更新)
+    //更新单条记录(执行更新)
     router.post('/manage/:defaultUrl/modify',function(req,res,next){
         var currentPage = req.params.defaultUrl;
         var targetObj = adminFunc.getTargetObj(currentPage);
         var params = url.parse(req.url,true);
+
+        console.log2(params);
+
         if(adminFunc.checkAdminPower(req,currentPage + '_modify')){
             if(targetObj == AdminUser || targetObj == User){
                 req.body.password = DbOpt.encrypt(req.body.password,settings.encrypt_key);
@@ -325,6 +334,9 @@ var returnAdminRouter = function(io) {
             }else if(targetObj == ContentCategory){
                 ContentCategory.updateCategoryTemps(req,res,params.query.uid);
             }
+
+            console.log2(req.body);
+
             DbOpt.updateOneByID(targetObj,req, res,"update one obj success")
         }else{
             res.end('对不起，您无权执行该操作！');
@@ -715,6 +727,34 @@ var returnAdminRouter = function(io) {
 
     });
 
+
+    router.get('/manage/cyg/:test', function(req, res, next) {
+        var params = url.parse(req.url,true);
+        var test = req.params.test;
+        var targetId = params.query.uid;
+
+        console.log2(test)
+        console.log2(targetId)
+
+        if(targetId){
+            if(shortid.isValid(targetId)){
+                User.findOne({'_id' : targetId}).populate('group').exec(function(err,user){
+                    if(err){
+                        res.end(err);
+                    }
+                    if(user){
+                        return res.json(user);
+                    }
+                })
+            }else{
+                res.end(settings.system_illegal_param);
+            }
+        }else{
+            console.log2(User);
+            req.name=111;
+            DbOpt.addOne(USER,req, res);
+        }
+    });
 
 
 //------------------------------------------文档分类管理开始

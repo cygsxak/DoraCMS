@@ -28,6 +28,32 @@ var fs = require('fs');
 var moment = require('moment');
 var filter = require('./util/filter');
 
+var dirname = path.dirname();
+
+//写入文件
+function write(txt){
+    var date = new Date();
+    var time = date.getFullYear() + "-" + (date.getMonth() < 10 ? '0' + (date.getMonth()+1) : (date.getMonth()+1)) + "-" + (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) ;
+    txt=time+'\n'+txt+"\n";
+    txt+="\t\n*******************************************\n";
+    appendfile(txt);
+}
+
+
+function appendfile(txt){
+    fs.appendFile(dirname+'/logs/2016-01-23.log', txt,'utf-8', function (err) {
+        if (err) throw err;
+        // console.log(txt); //文件被保存
+    });
+}
+
+console.log2 = function(msg){
+    console.log(msg);
+    msg = JSON.stringify(msg);
+    write(msg);
+}
+
+
 /*模板引擎*/
 var partials = require('express-partials');
 

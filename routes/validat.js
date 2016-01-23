@@ -32,8 +32,9 @@ router.get("/manage",function(req,res,next){
 });
 
 router.get("/manage/*",function(req,res,next){
-
     if(isAdminLogined(req)){
+        console.log(req.params);
+        //res.send('------cyg-------');
         next();
     }else{
         res.redirect("/admin");
@@ -57,7 +58,6 @@ validator.extend('isPsd', function (str) {
 validator.extend('isQQ', function (str) {
     return RegExp(/^[1-9][0-9]{4,9}$/).test(str);
 });
-
 
 //只能是英文
 validator.extend('isEn', function (str) {

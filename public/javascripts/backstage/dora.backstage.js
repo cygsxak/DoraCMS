@@ -126,15 +126,15 @@ function initApiPagination($scope,$http){
 function initPageInfo($scope){
     $("#dataLoading").removeClass("hide");
     $scope.selectPage = [
-        {name:'10',value : '10'},
-        {name:'20',value : '20'},
-        {name:'30',value : '30'}
+        {name:'1',value : '1'},
+        {name:'2',value : '2'},
+        {name:'10',value : '10'}
     ];
-    $scope.limitNum = '10';
+    $scope.limitNum = '1';
     $scope.currentPage = 1;
     $scope.totalPage = 1;
     $scope.totalItems = 1;
-    $scope.limit = 10;
+    $scope.limit = 1;
     $scope.pages = [];
     $scope.startNum = 1;
     $scope.keywords = $('#searchInput').val();
