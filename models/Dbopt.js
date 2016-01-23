@@ -60,6 +60,9 @@ var DbOpt = {
                     res.next(err);
                 }else{
                     console.log(logMsg+" success!");
+
+                    console.log2(result);
+
                     return res.json(result);
                 }
             })
@@ -80,6 +83,11 @@ var DbOpt = {
                 if(err){
                     res.end(err);
                 }else{
+
+                    console.log2(params);
+                    console.log2(targetId);
+                    console.log2(update);
+
                     console.log(logMsg+" success!");
                     res.end("success");
                 }
@@ -91,6 +99,9 @@ var DbOpt = {
     },
     addOne : function(obj,req,res){
         var newObj = new obj(req.body);
+
+        console.log2(req.body);
+
         newObj.save(function(err){
             if(err){
                 res.end(err);
@@ -105,10 +116,15 @@ var DbOpt = {
         console.log2(obj);
 
         var params = url.parse(req.url,true);
-        var startNum = (params.query.currentPage - 1)*params.query.limit + 1;
+
         var currentPage = Number(params.query.currentPage);
         var limit = Number(params.query.limit);
+        if(!(limit>0)){
+            limit =1;
+        }
         var pageInfo;
+
+        //console.log2(obj);
 
 //    根据条件查询记录(如果有条件传递，则按条件查询)
         var query;
@@ -122,6 +138,8 @@ var DbOpt = {
             query=obj.find({});
         }
         query.sort({'date': -1});
+        //query.skip(0);
+        //query.limit(2);
 
         if(obj === Message){
             query.populate('author').populate('replyAuthor').populate('adminAuthor');
@@ -140,8 +158,13 @@ var DbOpt = {
         query.exec(function(err,docs){
             if(err){
                 console.log(err)
-
             }else {
+                if(currentPage>Math.ceil(docs.length / limit)){
+                    currentPage = Math.ceil(docs.length / limit);
+                }
+                //var startNum = (params.query.currentPage - 1)*params.query.limit + 1;
+                var startNum = (currentPage - 1)*limit + 1;
+
                 pageInfo = {
                     "totalItems" : docs.length,
                     "currentPage" : currentPage,
@@ -149,10 +172,14 @@ var DbOpt = {
                     "startNum" : Number(startNum)
                 };
 
-                return res.json({
+                var resp = res.json({
                     docs : docs.slice(startNum - 1,startNum + limit -1),
-                    pageInfo : pageInfo
+                    pageInfo : pageInfo,
+                    docsall : docs,
                 });
+                console.log2(JSON.stringify(resp));
+
+                return resp;
             }
         })
     },
