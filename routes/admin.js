@@ -751,8 +751,7 @@ var returnAdminRouter = function(io) {
             }
         }else{
             var jsondata = {
-                "_id" : "cygssss",
-                "name" : "hello",
+                "name" : "从22一个测试",
                 "group" : "1",
                 "logo" : "/upload/images/defaultlogo.png",
                 "date" :"2016-01-23T14:36:30.384Z",
