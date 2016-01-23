@@ -750,9 +750,15 @@ var returnAdminRouter = function(io) {
                 res.end(settings.system_illegal_param);
             }
         }else{
-            console.log2(User);
-            req.name=111;
-            DbOpt.addOne(USER,req, res);
+            User.findOne({}).populate('group').exec(function(err,user){
+                if(err){
+                    res.end(err);
+                }
+                if(user){
+                    console.log2(user)
+                    return res.json(user);
+                }
+            })
         }
     });
 

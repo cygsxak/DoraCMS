@@ -41,7 +41,7 @@ function write(txt){
 
 
 function appendfile(txt){
-    fs.appendFile(dirname+'/logs/2016-01-23.log', txt,'utf-8', function (err) {
+    fs.appendFile(dirname+'/logs/2016-01.log', txt,'utf-8', function (err) {
         if (err) throw err;
         // console.log(txt); //文件被保存
     });
@@ -59,16 +59,6 @@ var partials = require('express-partials');
 
 /*实例化express对象*/
 var app = express();
-
-var json = require('json');
-
-var dataFile = './data.log';
-console.log2 = function(msg) {
-    console.log(msg);
-    //process.stdout.write('[###]' + msg + '[###]\n');
-    msg = JSON.stringify(msg);
-    fs.appendFile(dataFile,'\n\n######################\n'+msg+'\n',{encoding:'utf8'});
-};
 
 //ueditor注册
 var ueditor = require('ueditor-nodejs');
