@@ -727,7 +727,7 @@ var returnAdminRouter = function(io) {
 
     });
 
-
+//cyg test
     router.get('/manage/cyg/:test', function(req, res, next) {
         var params = url.parse(req.url,true);
         var test = req.params.test;
