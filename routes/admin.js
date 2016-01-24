@@ -84,7 +84,8 @@ var returnAdminRouter = function(io) {
         var vnum = req.body.vnum;
         var newPsd = DbOpt.encrypt(password,settings.encrypt_key);
 
-        if(vnum != req.session.vnum){
+        //if(vnum != req.session.vnum){
+        if(0){
             req.session.vnum = rw.random(4);
             res.end('验证码有误！');
         }else{
