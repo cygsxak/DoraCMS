@@ -22,6 +22,11 @@ exports.authUser = function (req, res, next) {
     if (settings.debug && req.cookies['mock_user']) {
         var mockUser = JSON.parse(req.cookies['mock_user']);
         req.session.user = new UserModel(mockUser);
+
+
+        console.log2(req.session.user);
+
+
          return next();
     }
 

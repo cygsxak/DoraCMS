@@ -189,7 +189,7 @@ var DbOpt = {
         var page = parseInt(req.query.page);
         var limit = parseInt(req.query.limit);
         if (!page) page = 1;
-        if (!limit) limit = 15;
+        if (!limit) limit = 2;
         var order = req.query.order;
         var sq = {}, Str, A = 'problemID', B = 'asc';
         if (order) {    //是否有排序请求

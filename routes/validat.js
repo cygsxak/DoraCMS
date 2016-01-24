@@ -13,6 +13,14 @@ function isAdminLogined(req){
     return req.session.adminlogined;
 }
 
+router.get("/cyg/:a/:b/",function(req,res,next){
+    console.log2(req.params.a);
+    console.log2(req.params.b);
+    return res.json({a:111,b:222});
+    //res.end('ccc');
+});
+
+
 router.get("/",function(req,res,next){
     if(isAdminLogined(req)){
         res.redirect("/admin/manage");
@@ -33,8 +41,6 @@ router.get("/manage",function(req,res,next){
 
 router.get("/manage/*",function(req,res,next){
     if(isAdminLogined(req)){
-        console.log(req.params);
-        //res.send('------cyg-------');
         next();
     }else{
         res.redirect("/admin");

@@ -18,13 +18,11 @@ var settings = require("../models/db/settings");
 var siteFunc = require("../models/db/siteFunc");
 var adminFunc = require("../models/db/adminFunc");
 //文件压缩
-var fs = require('fs');
 var child = require('child_process');
 var archiver = require('archiver');
 var formidable = require('formidable')
 var mime = require('../util/mime').types;
 var iconv = require('iconv-lite');
-var send_sms_uri = '/v1/sms/send.json';
 
 var system = {
 
